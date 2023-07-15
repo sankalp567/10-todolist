@@ -1,0 +1,32 @@
+<%- include("header") -%>
+
+  <div class="box" id="heading">
+    <h1>
+      <%= listTitle %>
+    </h1>
+  </div>
+
+  <div class="box">
+    <% newListItems.forEach((element)=> {%>
+      <form action="/delete" method="post">
+        <!-- we are using this form to delete checked item for that we need post methord -->
+        <div class="item">
+          <input type="checkbox" name="checkbox" value="<%= element._id %>" onchange="this.form.submit()">
+          <!-- here onChange attritube will submit form when checked the checkbox -->
+          <!-- we have given name and value to checkbox so will will get it id for deleting porpuses -->
+          <p>
+            <%= element.name %>
+          </p>
+        </div>
+        <input type="hidden" name="listname" value="<%= listTitle %>"></input>
+        <!-- here we have used input:hidden to give name of lisst to delete route -->
+      </form>
+      <% }); %>
+
+        <form class="item" action="/" method="post">
+          <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+          <button type="submit" name="list" value="<%= listTitle %>">+</button>
+        </form>
+  </div>
+
+  <%- include("footer") -%>
